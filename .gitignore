@@ -3,3 +3,4 @@
 /.idea/spring-boot-intensive-course.iml
 /.idea/vcs.xml
 /.idea/.gitignore
+/book-store-api/.mvn/wrapper/maven-wrapper.jar

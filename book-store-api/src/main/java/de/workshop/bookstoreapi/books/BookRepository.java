@@ -19,7 +19,7 @@ public class BookRepository {
     // Wird ausgeführt nachdem Spring die BookController Bean instanziiert hat
     @PostConstruct
     public List<Book> getBooks() throws IOException {
-        return Arrays.asList(mapper.readValue(new File("target/classes/books.json"), Book[].class));
+        return Arrays.asList(mapper.readValue(new File("C:/Users/DIBVOIGT/Development/Java/spring-boot-intensive-course/book-store-api/target/classes/books.json"), Book[].class));
     }
 
 }
