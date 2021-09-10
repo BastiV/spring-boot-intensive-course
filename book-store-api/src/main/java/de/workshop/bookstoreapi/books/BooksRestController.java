@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping(BooksRestController.REQUEST_URL)
 public class BooksRestController {
 
-    public static final String REQUEST_URL = "/books";
+    static final String REQUEST_URL = "/books";
 
     private final BookService bookService;
 
@@ -19,8 +19,12 @@ public class BooksRestController {
     }
 
     @GetMapping
-    public List<Book> getAllBooks() {
-        return bookService.getBooks();
+    public ResponseEntity<List<Book>> getAllBooks() {
+        List<Book> books = bookService.getBooks();
+        if(books == null || books.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(books);
     }
 
     @GetMapping("/{isbn}")
