@@ -1,22 +1,31 @@
----
 spring:
-  config:
-    activate:
-      on-profile:
-        - prod
+  datasource:
+    url: jdbc:h2:./bookdb;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
+    username: user
+    password:
 
-server:
-  port: 8090
+  sql:
+    init:
+     mode: never
 
----
-spring:
-  config:
-    activate:
-      on-profile:
-        - dev
+  jpa:
+    open-in-view: true
+    defer-datasource-initialization: false
+    hibernate:
+      ddl-auto: none
 
-server:
-  port: 8080
+  liquibase:
+    change-log: db.changelog-master.xml
+    enabled: true
 
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
-
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%X{user}] %highlight(%-5level) %highlight(%48.48logger) - %msg%n"
+  level:
+    "[org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator]": debug
+    "[org.springframework.web]": info

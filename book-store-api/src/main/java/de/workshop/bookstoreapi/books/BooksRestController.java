@@ -19,12 +19,9 @@ public class BooksRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Book>> getAllBooks() {
+    public List<Book> getAllBooks() {
         List<Book> books = bookService.getBooks();
-        if(books == null || books.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(books);
+        return books;
     }
 
     @GetMapping("/{isbn}")
