@@ -1,5 +1,5 @@
 <configuration scan="true" scanPeriod="10 seconds" debug="false">
-    <springProfile name="default"><!-- no date, ansi colored, no file -->
+    <springProfile name="default, prod"><!-- no date, ansi colored, no file -->
         <!-- switch from long to short debug log -->
         <property name="PATTERN"
                   value="%d{HH:mm:ss.SSS} [%X{user}] %highlight(%-5level) %highlight(%48.48logger) - %msg%n"/>
@@ -8,7 +8,7 @@
         <property name="PATTERN"
                   value="%d{dd.MM.yyyy HH:mm:ss.SSS} [%X{user}] [%thread] %-5level %logger{36} - %msg%n"/>
     </springProfile>
-    <springProfile name="prod"><!-- no color but file -->
+    <springProfile name="prod2"><!-- no color but file -->
         <property name="PATTERN"
                   value="%d{dd.MM.yyyy HH:mm:ss.SSS} [%X{user}] [%thread] %-5level %logger{36} - %msg%n"/>
         <property name="LOGFILE" value="workshop"/>
@@ -21,7 +21,7 @@
         </encoder>
     </appender>
 
-    <springProfile name="prod"><!-- no color but file -->
+    <springProfile name="prod2"><!-- no color but file -->
         <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <file>${LOGFILE}.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -37,10 +37,10 @@
 
     <!-- For all those not explicitly defined below use this log level: -->
     <root level="INFO">
-        <springProfile name="default, jenkins">
+        <springProfile name="default, jenkins, prod, dev">
             <appender-ref ref="STDOUT"/>
         </springProfile>
-        <springProfile name="prod">
+        <springProfile name="prod2">
             <appender-ref ref="FILE"/>
         </springProfile>
     </root>
