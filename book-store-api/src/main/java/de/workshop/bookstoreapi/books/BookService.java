@@ -26,11 +26,7 @@ public class BookService {
     public void init() {
         books = Collections.emptyList();
 
-        try {
-            books = bookRepository.getBooks();
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
+        books = bookRepository.findAllBooks();
     }
 
     public List<Book> getBooks() {
